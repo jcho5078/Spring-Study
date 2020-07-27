@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://www.springframework.org/schema/beans" 
+xmlns:c="http://www.springframework.org/schema/c"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:context="http://www.springframework.org/schema/context">
+	
+	
+	<!-- application-context : GenericXmlApplicationContext Import후 사용 (DI방식)-->
+	<!-- 클래스 객체를 외부에서 가져옴(DI방식) -->
+	
+	<!--  DI 사용 EX)
+		<bean id="calculator" class="com.jcho5078.blog.Calculator" /> //Calculator 클래스의 객체 calculator 생성
+		<bean id="myCalculator" class="com.jcho5078.blog.MyCalculator"> //MyCalculator 클래스의 객체 myCalculator 생성
+			<property name="calculator"> //myCalculator객체의 전역변수 calculator에 값 지정 (해당 클래스 내용)==> private Calculator calculator;
+				<ref bean="calculator" /> //객체를 생성하는 형태이므로 ref로 객체 이름 지정.
+			</property>
+			<property name="firstNum" value="5" /> //myCalculator객체의 firstNum 변수에 값 5 지정. (해당 클래스 내용)==> private int firstNum = 0;
+			<property name="secondNum" value="3" /> //myCalculator객체의 secondNum 변수에 3 지정. (해당 클래스 내용)==> private int secondNum = 0;
+		</bean>
+	 -->
+	
+	
+	<bean id="userVO" class="com.jcho5078.user.UserVO">
+		<constructor-arg><value>Man</value></constructor-arg>
+		<constructor-arg value="1234"/>
+	</bean>
+	<!-- 생성자 형식으로 빈 객체 생성. 생성자 파라미터에 순서대로 입력된다. -->
+	
+	<bean id="refSub" class="com.jcho5078.ref.RefSub">
+		<constructor-arg><value>출력</value></constructor-arg>
+	</bean>
+	<bean id="refMain" class="com.jcho5078.ref.RefMain">
+		<constructor-arg><ref bean="refSub"/></constructor-arg>
+	</bean>
+	<!-- 빈 객체에서 객체형식을 띈 생성자의 파라미터를 다른 bean객체를 불러와 지정. 생성자 형식이니 따로 name지정 안함.-->
+	
+	<!-- <property>태그에서 필드의 값이나 객체에 접근 시에는 
+		해당 필드이름을 name속성 으로 명시하고 value나 ref를 통해 값을 지정한다. -->
+		
+	<!-- List,Map,Set 타입의 필드는 <list>태그로  접근-->
+	
+	<bean id="userVO2" class="com.jcho5078.user.UserVO"
+		c:userId="man2" c:userPw="1234"
+	/>
+	<!-- 'c:파라미터이름' 구성으로 c네임스페이스를 사용하면 생성자 태그인 <constructor-arg>보다 간결하게 작성 가능
+		  p네임스페이스는 <property>태그를 대체한다.  -->
+	
+	<bean id="userVO3" class="com.jcho5078.user.UserVO"
+		c:_0="man3" c:_1="1234"
+	/>
+	<!-- 'c:_인덱스'로 파라미터 입력 순서에 따라서 값을 넣을 수 있다. -->
+		  
+	<bean id="refSub3" class="com.jcho5078.ref.RefSub"
+		c:str="출력"/>
+		
+	<bean id="refMain3" class="com.jcho5078.ref.RefMain"
+		c:sub-ref="refSub3"/>
+	<!-- 객체 형식을 빈객체에 넣기 위해서는 'c:파라미터이름-ref' 혹은, 'c:_인덱스-ref'를 사용한다. -->
+	
+	
+	<context:annotation-config/>
+	<!-- context태그는 @Configuration, @Autowired, @Resource 등의 어노테이션을 인식할 수 있게 만들어주는 역할을 한다.
+		 이 태그를 사용하면 @Configuration이 적용된 빈 객체를 추가하여 설정정보로 사용해, Autowired를 통한 자동연결에 사용 한다.    -->
+	
+	<!-- <bean class="com.jcho5078.DI.Config"/> -->
+	<!-- 클래스에서 설정한 값을 XML에 불러오고 싶을 때. -->
+	
+</beans>
