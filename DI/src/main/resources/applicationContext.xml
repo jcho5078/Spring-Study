@@ -66,7 +66,6 @@ xmlns:context="http://www.springframework.org/schema/context">
 	EX)https://javaslave.tistory.com/53
 	
 	클래스들을 구현한 후, 해당 클래스들의 DI를 생성하기위한 FactoryBean인스턴스를 상속받는 클래스인 Factroy클래스 생성(MessageFactoryBean)
-	
     <bean id="hiFactoryBean" class="com.jcho5078.factory.MessageFactoryBean">
         <property name="type">
             <value>Hi</value>
@@ -79,6 +78,7 @@ xmlns:context="http://www.springframework.org/schema/context">
         </property>
     </bean>
     
+	위에서 작성했던 FactortBean을 상속한 클래스를 사용하는 클래스.
     <bean id="messageRenderrer" class="com.jcho5078.render.MessageRederrer">
         <property name="hiProvider">
             <ref bean="hiFactoryBean"/>
@@ -93,6 +93,8 @@ xmlns:context="http://www.springframework.org/schema/context">
 	<context:annotation-config/>
 	<!-- context태그는 @Configuration, @Autowired, @Resource 등의 어노테이션을 인식할 수 있게 만들어주는 역할을 한다.
 		 이 태그를 사용하면 @Configuration이 적용된 빈 객체를 추가하여 설정정보로 사용해, Autowired를 통한 자동연결에 사용 한다.    -->
+	
+	
 	
 	<!-- <bean class="com.jcho5078.DI.Config"/> -->
 	<!-- 클래스에서 설정한 값을 XML에 불러오고 싶을 때. -->
