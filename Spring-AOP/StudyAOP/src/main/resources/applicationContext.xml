@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+	<bean id="aroundAdvice" class="com.jcho5078.aop.AroundAdvice"/>
+	
+	<!-- AOP 설정 -->
+	<aop:config>
+		<aop:aspect id="around" ref="aroundAdvice">
+			<!-- pointcut(핵심기능)의 id는 publicMethod이고, com.jcho5078.aop 패키지 내에있는 모든 클래스에 공통기능 적용. -->
+			<aop:pointcut id="publicMethod" expression="within(com.jcho5078.*)"/>
+			
+			<!-- publicMethod라는 id를가진 핵심기능에 trace라는 메소드를 적용 -->
+			<aop:around pointcut-ref="publicMethod" method="trace"/>
+		</aop:aspect>
+	</aop:config>
+	
+	<!-- 빈 객체 생성 -->
+	<bean id="write" class="com.jcho5078.aop.Write">
+		<constructor-arg>
+			<value>Write 메소드</value>
+		</constructor-arg>
+	</bean>
+	
+</beans>
