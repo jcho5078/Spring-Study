@@ -2,3 +2,19 @@
 오류는 없고, 프록시 생성도 제대로 되었는데, 이상하게 안된다.
 
 이번에는 XML만을 이용한 AOP구현만을 시도했으니, 다음에는 어노테이션을 이용해 Spring MVC프로젝트에서 구동시켜봐야겠다.
+
+-8.03 추가
+
+https://groups.google.com/forum/#!msg/ksug/tqNa5VPaP60/yScPmom968IJ
+
+<MultiActionController를 상속받으셨다면 AOP적용이 되지 않습니다
+ aop적용을 할 수 있는 handleRequest가 final로 되어 있기 때문에  proxy적용이 안 됩니다.
+혹시 controller를 수정하신 것 아닌지 모르겠습니다. >
+
+스프링 MVC에서는 2.5버전 이후부터 AbstractController.handleRequest()에 final이 없어지면서 AOP 적용이 안된다.
+그래서 Controller에는 적용이 안된다.
+
+< servlet-dispatcher.xml파일에 contoller를 선언해 두었더니 AOP가 적용이 안돼더라구요..
+내부적으로 어떻게 돼는지는 모르지만 어쨋던 controller를 다른 xml파일로 빼니깐 해결이 돼네요.. ^^;;; >
+
+위처럼 Controller들을 선언한 Config.xml에 선언한 Controller 빈들을 다른 xml에 옮기던지 해야한다.

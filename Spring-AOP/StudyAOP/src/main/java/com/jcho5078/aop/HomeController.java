@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,7 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		run1();//AOP 불러오기 테스트
+		run2();
 		
 		String formattedDate = dateFormat.format(date);
 		
@@ -40,8 +42,16 @@ public class HomeController {
 	}
 	
 	public void run1() {
-		GenericXmlApplicationContext ctx =
+		AbstractApplicationContext ctx =
 				new GenericXmlApplicationContext("classpath:applicationContext.xml");
+		Write write = ctx.getBean("write",Write.class);
+		
+		write.writeStr();
+	}
+	
+	public void run2() {
+		AbstractApplicationContext ctx =
+				new GenericXmlApplicationContext("classpath:applicationContext2.xml");
 		Write write = ctx.getBean("write",Write.class);
 		
 		write.writeStr();
