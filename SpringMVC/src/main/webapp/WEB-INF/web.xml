@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+	</context-param>
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<!-- XML로 작성시 param-name값을 contextConfigLocation로 설정 -->
+			<param-name>contextConfigLocation</param-name>
+			<!-- 설정파일 목록 -->
+			<param-value>
+				/WEB-INF/spring/appServlet/servlet-context.xml
+				<!-- XML 스프링 컨테이너로 등록한 여러 개의 서블릿 설정 정보를 불러올때 예제
+				/WEB-INF/main.xml
+				classpath:/common.xml	이렇게 여러개 나열
+				 -->
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- 클래스를 이용해 서블릿 설정할 시.
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<init-param>
+	 	XML로 작성시 param-name값을 contextClass로 설정
+			<param-name>contextClass</param-name>
+			
+			 설정파일(클래스 사용시 고정) 
+			<param-value>
+				org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+			</param-value>
+		</init-param>
+		
+		 XML로 작성시 param-name값을 contextClass로 설정 
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			
+			 설정파일(클래스 사용시 고정) 
+			<param-value>
+				com.jcho5078.설정클래스파일
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	 -->
+	 
+	 
+	<filter> 
+	    <filter-name>encodingFilter</filter-name> 
+	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+	    <init-param> 
+	       <param-name>encoding</param-name> 
+	       <param-value>UTF-8</param-value> 
+	    </init-param> 
+	    <init-param> 
+	       <param-name>forceEncoding</param-name> 
+	       <param-value>true</param-value> 
+	    </init-param> 
+ 	</filter> 
+	 <filter-mapping> 
+	    <filter-name>encodingFilter</filter-name> 
+	    <url-pattern>/*</url-pattern> <!-- 모든 url에 인코딩 적용될 수 있게 함 -->
+	 </filter-mapping>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+</web-app>
