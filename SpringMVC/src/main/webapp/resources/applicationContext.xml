@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:mvc="http://www.springframework.org/schema/mvc">
+
+
+<mvc:annotation-driven/>
+<!-- Validator 클래스 구현없이 검증을 사용하기 위해 NoValidatorClass를 사용해 DI등록.
+	컨트롤러에서 @Valid를 붙인 파라미터의 클래스 객체에 JER303이 자동으로 접근해 바인딩한다.
+ -->
+
+</beans>
