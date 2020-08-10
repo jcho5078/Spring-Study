@@ -1,4 +1,4 @@
-package com.jcho5078.mvc.mapping;
+package com.jcho5078.mvc.mapping2;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@SessionAttributes("eventForm")
-public class EventController {
+@SessionAttributes("eventForm2")
+public class EventController2 {
 	
-	@RequestMapping("/eventForm")
+	@RequestMapping("/eventForm2")
 	public String goForm() {
-		return "form";
+		return "form2";
 	}
 	
-	@RequestMapping(value = "/event", method = RequestMethod.GET)
-	public String GetData(@ModelAttribute EventVO eventVO, ModelMap model) {
+	@RequestMapping(value = "/event2", method = RequestMethod.POST)
+	public String GetData(@ModelAttribute("vo") EventVO2 eventVO, ModelMap model) {
 		
 		System.out.println("VO값 확인" + eventVO);
 		System.out.println("VO의 name 확인" + eventVO.getName());
@@ -29,11 +29,11 @@ public class EventController {
 		
 		System.out.println(model);
 		
-		return "form";
+		return "form2";
 	}
 	
-	@RequestMapping(value="/event1", method = RequestMethod.POST)
-	public String PostData(@ModelAttribute EventVO eventVO, ModelMap model) {
+	@RequestMapping(value="/event3", method = RequestMethod.POST)
+	public String PostData(@ModelAttribute("vv") EventVO2 eventVO, ModelMap model) {
 		
 		System.out.println("VO값 확인" + eventVO);
 		System.out.println("VO의 name 확인" + eventVO.getName());
@@ -44,6 +44,6 @@ public class EventController {
 		
 		System.out.println(model);
 			
-		return "form";//Model을 사용하면서 컨트롤러에서 뷰로 값을 전달할 때에는 해당 jsp를 리턴.
+		return "form2";//Model을 사용하면서 컨트롤러에서 뷰로 값을 전달할 때에는 해당 jsp를 리턴.
 	}
 }
