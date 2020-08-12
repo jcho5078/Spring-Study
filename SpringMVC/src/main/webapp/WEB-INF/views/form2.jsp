@@ -17,7 +17,7 @@
 			<legend>"vv" 커스텀 객체 값 가져오기</legend>
 			이름: <input type="text" name="name"><br>
 			비밀번호: <input type="text" name="pw"><br>
-			<input type="submit" value="전송"><br>r
+			<input type="submit" value="전송"><br>
 			<br>
 			전송한 값: ${vo.name} , ${vo.pw}
 		</fieldset>
