@@ -6,7 +6,9 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jcho5078.DI.Config;
+import com.jcho5078.DiUseAnnotation.UseFunc;
 import com.jcho5078.ref.RefMain;
 import com.jcho5078.user.UserRepository;
 import com.jcho5078.user.UserVO;
@@ -43,6 +46,7 @@ public class HomeController {
 		runTest1();
 		runTest2();
 		runTest3();
+		runTest4();
 		
 		return "home";
 	}
@@ -77,6 +81,14 @@ public class HomeController {
 		//Config클래스에 설정한 빈객체 출력. Config내 user1이라는 빈객체의 값인 userId를 출력한다. 사전에 설정해둔 "man1"이 출력됨. 
 		
 		ctx.close();
+	}
+	
+	public void runTest4() {//어노테이션을 이용해 주입.
+		ApplicationContext ctx = 
+				new ClassPathXmlApplicationContext("applicationContext.xml");
+		UseFunc useFunc = ctx.getBean(UseFunc.class);
+		
+		useFunc.getUseVO();// 결과로 "냥냥펀치"와 1234를 출력할 것.
 	}
 	
 }
