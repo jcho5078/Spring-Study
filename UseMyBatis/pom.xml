@@ -59,9 +59,10 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
+			<!-- log4j2 설정위함. 출처:https://recollectionis.tistory.com/173 -->
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.13.3</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.mail</groupId>
