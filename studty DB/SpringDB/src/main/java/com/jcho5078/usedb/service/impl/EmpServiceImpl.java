@@ -20,6 +20,10 @@ public class EmpServiceImpl implements EmpService{
 		
 		return empDAO.viewEmp();
 	}
-	
+
+	@Override
+	public void insertEmp(EmpVO empVO) {
+		empDAO.insertEmp(empVO);
+	}
 	
 }

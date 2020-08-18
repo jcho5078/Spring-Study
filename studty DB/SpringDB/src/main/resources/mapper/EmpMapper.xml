@@ -8,4 +8,8 @@
 		FROM EMP	
 	</select>
 	
+	<insert id="insertEmp" parameterType="EmpVO">
+		INSERT INTO EMP (EMPNO, ENAME, JOB,HIREDATE, SAL) VALUES (#{empno}, #{ename}, #{job}, SYSDATE, #{sal})
+	</insert>
+	
 </mapper>

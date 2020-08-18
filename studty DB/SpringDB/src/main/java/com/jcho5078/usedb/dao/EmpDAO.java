@@ -7,4 +7,5 @@ import com.jcho5078.usedb.vo.EmpVO;
 public interface EmpDAO {
 
 	public List<EmpVO> viewEmp();
+	public void insertEmp(EmpVO empVO);
 }
