@@ -25,5 +25,20 @@ public class EmpServiceImpl implements EmpService{
 	public void insertEmp(EmpVO empVO) {
 		empDAO.insertEmp(empVO);
 	}
+
+	@Override
+	public void deleteEmp(EmpVO empVO) {
+		empDAO.deleteEmp(empVO);
+	}
+
+	@Override
+	public void updateEmp(EmpVO empVO) {
+		empDAO.updateEmp(empVO);
+	}
+
+	@Override
+	public List<EmpVO> viewEmp2(EmpVO empVO) {
+		return empDAO.viewEmp2(empVO);
+	}
 	
 }

@@ -22,7 +22,26 @@ public class EmpDAOImpl extends SqlSessionDaoSupport implements EmpDAO{
 
 	@Override
 	public void insertEmp(EmpVO empVO) {
-		System.out.println("DAO 실행 확인.");
+		System.out.println("DAO insert 실행 확인.");
 		sqlSession.insert("emp.insertEmp", empVO);
 	}
+
+	@Override
+	public void deleteEmp(EmpVO empVO) {
+		System.out.println("DAO delete 실행 확인.");
+		sqlSession.delete("emp.deleteEmp", empVO);
+	}
+
+	@Override
+	public void updateEmp(EmpVO empVO) {
+		System.out.println("DAO update 실행 확인.");
+		sqlSession.update("emp.updateEmp", empVO);
+	}
+
+	@Override
+	public List<EmpVO> viewEmp2(EmpVO empVO) {
+		return sqlSession.selectList("emp.viewEmp", empVO);
+	}
+	
+	
 }

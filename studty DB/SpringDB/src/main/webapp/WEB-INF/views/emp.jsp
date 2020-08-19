@@ -26,8 +26,7 @@
 			<th>DEPTNO</th>
 		</tr>
 		<%
-			if(commonList.size()>0){
-				for(int i=0 ; i<commonList.size() ; i++){
+			for(int i=0 ; i<commonList.size() ; i++){
 		%>
 		<tr>
 			<td><%=commonList.get(i).getEmpno() %></td>
@@ -40,7 +39,6 @@
 			<td><%=commonList.get(i).getDeptno() %></td>
 		</tr>
 		<%
-				}
 			}
 		%>
 	</table>

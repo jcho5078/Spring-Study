@@ -12,4 +12,14 @@
 		INSERT INTO EMP (EMPNO, ENAME, JOB,HIREDATE, SAL) VALUES (#{empno}, #{ename}, #{job}, SYSDATE, #{sal})
 	</insert>
 	
+	<delete id="deleteEmp" parameterType="EmpVO">
+		DELETE FROM EMP WHERE EMPNO = #{empno}
+	</delete>
+	
+	<update id="updateEmp" parameterType="EmpVO">
+		UPDATE EMP 
+		SET ENAME = #{ename}, JOB= #{job}, SAL= #{sal} 
+		WHERE EMPNO = #{empno}
+	</update>
+	
 </mapper>

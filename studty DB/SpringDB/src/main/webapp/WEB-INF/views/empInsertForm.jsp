@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form name="EmpVO" action="empInsert">
+	<form:form name="insertEmp" action="empInsert">
 		<table border="1">
 			<tr>
 				<th>EMPNO</th>
@@ -29,6 +29,33 @@
 			</tr>
 		</table>
 	</form:form>
-	
+	<hr>
+	<form:form name="deleteEmp" action="empDelete">
+		<table border="1" style="size: 300px">
+			<tr>
+				<th>삭제 하려는 ROW의 EMPNO 입력</th>
+			</tr>
+			<tr>
+				<td><input type="text" name="empno" value="empno"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="삭제"/></td>
+			</tr>
+		</table>
+	</form:form>
+	<hr>
+	<form:form name="updateEmp" action="empUpdate">
+		<table border="1" style="size: 300px">
+			<tr>
+				<th>수정하려는 ROW의 EMPNO와 변경하려는 값 입력</th>
+			</tr>
+			<tr>
+				<td><input type="text" name="empno" value="empno"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="수정"/></td>
+			</tr>
+		</table>
+	</form:form>
 </body>
 </html>
