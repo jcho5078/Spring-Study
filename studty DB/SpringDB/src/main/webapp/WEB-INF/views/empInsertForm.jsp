@@ -51,6 +51,9 @@
 			</tr>
 			<tr>
 				<td><input type="text" name="empno" value="empno"></td>
+				<td><input type="text" name="ename" value="ename"></td>
+				<td><input type="text" name="job" value="job"></td>
+				<td><input type="text" name="sal" value="sal"></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="수정"/></td>
