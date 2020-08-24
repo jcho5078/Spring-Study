@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:sec="http://www.springframework.org/schema/security" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/security 
+	http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	<!-- 정적파일 -->
+	<sec:http pattern="/assets/**" security="none" />
+	
+	<!-- 권한 설정 -->
+	<sec:http use-expressions="false">
+		<sec:intercept-url pattern="/**" access="hasRole('USER')"/>
+		<sec:form-login login-page="/login"/>
+		<sec:logout logout-url="/logout"/>
+	</sec:http>
+	
+	<!-- provider -->
+	<!-- 작동 테스트를 위한 인메모리 처리 방식 -->
+	<sec:authentication-manager>
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="user" password="1234" authorities="ROLE_USER"/>
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+	
+</beans>
