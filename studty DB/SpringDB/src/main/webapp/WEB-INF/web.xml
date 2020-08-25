@@ -12,7 +12,7 @@
 		</param-value>
 	</context-param>
 	
-	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<!-- RootWAC -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
@@ -32,12 +32,23 @@
 	<filter>
 	    <filter-name>springSecurityFilterChain</filter-name>
 	    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	    <!-- 스프링 시큐리티 설정 오류 위함.  -->
+	    <!-- https://sbcoba.tistory.com/entry/DispatcherServlet%EB%A7%8C-%EC%82%AC%EC%9A%A9-%EC%8B%9C%EC%97%90-DelegatingFilterProxy-%EB%93%B1%EB%A1%9D-%EB%B0%A9%EB%B2%95 -->
+		<init-param>
+			<param-name>contextAttribute</param-name>
+			<param-value>org.springframework.web.servlet.FrameworkServlet.CONTEXT.appServlet</param-value><!-- contextAttribute가 디스패처 서블릿 이름과 동일해야함. -->
+  		</init-param>
 	</filter>
+	
 	<filter-mapping>
 	    <filter-name>springSecurityFilterChain</filter-name>
 	    <url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<!-- 세션처리 이벤트 관련 리스너 -->
+	<listener> 
+		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class> 
+	</listener>
 	
 	<filter>
 		<filter-name>encodingFilter</filter-name>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.jcho5078.usedb.vo.EmpVO"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<sec:authorize access="hasAuthority('ROLE_MANAGER')">
 	<form:form name="insertEmp" action="empInsert">
 		<table border="1">
 			<tr>
@@ -60,5 +62,9 @@
 			</tr>
 		</table>
 	</form:form>
+	</sec:authorize>
+	<sec:authorize access="hasAuthority('ROLE_USER')">
+		<h1>권한이 없습니다.</h1>
+	</sec:authorize>
 </body>
 </html>
