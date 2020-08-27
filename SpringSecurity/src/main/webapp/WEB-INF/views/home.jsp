@@ -15,9 +15,9 @@
 
 <h2>페이지 이동</h2>
 <h3>*<a href="" >로그아웃</a></h3>
-<h3>*<a href="/userForm" >유저 정보 확인</a></h3>
+<h3>*<a href="userForm" >유저 정보 확인</a></h3>
 <hr>
-<h3>*<a href="" >유저 목록 확인</a></h3>
+<h3>*<a href="manage/viewAllUser" >유저 목록 확인(관리자)</a></h3>
 
 </body>
 </html>

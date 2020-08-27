@@ -54,6 +54,13 @@
 			<version>1.6</version>
 		</dependency>
  		
+ 		<!-- Jackson (converter JSON) -->
+ 		<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+			<version>2.5.4</version>
+        </dependency>
+ 		
  		<!-- Security --> 
  		<dependency> 
 	 		<groupId>org.springframework.security</groupId> 

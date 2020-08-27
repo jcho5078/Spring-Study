@@ -6,7 +6,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.web.security.user.service.UserService;
 import com.web.security.user.vo.UserVO;
@@ -40,9 +43,32 @@ public class UserController {
 	@RequestMapping("manage/viewAllUser")
 	public String viewAllUser(Model model, UserVO vo) {
 		
+		System.out.println();
+		
 		model.addAttribute("viewAllUser", userService.selectUser(vo));
 		
 		return "viewAllUser";
+	}
+	
+	@RequestMapping(value = "manage/updateAllUserForm",method = RequestMethod.GET)
+	public String moveUpdateForm(Model model, UserVO vo) {
+		
+		model.addAttribute("User", vo);
+		return "updateForm";
+	}
+	
+	@RequestMapping(value = "manage/updateAllUserForm", method = RequestMethod.POST)
+	@ResponseBody//POST만 처리하기에 이 어노테이션 있으면 페이지 이동 안됨.
+	public void getUpdateFormAllUser(Model model, @RequestBody UserVO vo) {//@RequestBody로 ajax에서 전송된 json을 객체로 변환
+		
+		System.out.println(vo.getId());
+		System.out.println(vo.getName());
+		System.out.println(vo.getPw());
+		
+		model.addAttribute("User", vo);
+		moveUpdateForm(model, vo);
+		
+		//return vo;//JSON값은 받아오나, 페이지 이동이 안되어 고생중..
 	}
 	
 	@RequestMapping("manage/updateAllUser")

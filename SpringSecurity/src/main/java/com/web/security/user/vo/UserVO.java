@@ -4,8 +4,15 @@ public class UserVO {
 	
 	private String id;
 	private String pw;
-	private String hiredate;
 	private String name;
+	private String hiredate;
+	
+	public String getHiredate() {
+		return hiredate;
+	}
+	public void setHiredate(String hiredate) {
+		this.hiredate = hiredate;
+	}
 	
 	public String getId() {
 		return id;
