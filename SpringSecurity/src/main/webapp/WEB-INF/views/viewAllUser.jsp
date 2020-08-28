@@ -25,10 +25,19 @@
 			<td>${user.name}</td>
 			<td>${user.hiredate}</td>
 			<td>
-				<input type="button" id="modify" value="수정">
+				<form action="updateAllUserForm" id="modifyForm" method="post">
+					<input type="button" id="modify"value="수정">
+					<input type="hidden" id="id" name="id" value="">
+					<input type="hidden" id="pw" name="pw" value="">
+					<input type="hidden" id="name" name="name" value="">
+					<input type="hidden" id="hiredate" name="hiredate" value="">
+				</form>
 			</td>
 			<td>
-				<input type="button" id="delete" value="삭제">
+				<form action="deleteAllUser" id="deleteForm" method="post">
+					<input type="button" id="delete" value="삭제">
+					<input type="hidden" id="delete_id" name="id" value="">
+				</form>
 			</td>
 		</tr>
 		</c:forEach>
@@ -36,12 +45,11 @@
 <script type="text/javascript">
 
 $("#modify").click(function() {
-	
 	var tdArr = new Array();
-	var object = new Object();//json 배열에 넣을 object
+	var object = new Object();//json 배열에 넣을 object (여기선 사용 안하지만, 여러 개의 JSON객체를 사용하는 배열 용.)
 	var Btn = $(this);
 	
-	var tr = Btn.parent().parent();
+	var tr = Btn.parent().parent().parent();
 	var td = tr.children();
 	
 	var id = td.eq(0).text();
@@ -59,38 +67,28 @@ $("#modify").click(function() {
 	console.log(JSON.stringify(tdArr));
 	console.log(JSON.stringify(object));
 	
-	$.ajax({
-		
-		dataType:'json',
-		contentType: "application/json; charset=UTF-8", //JSON데이터를 보낼 때, 꼭 application/json으로 설정.
-		type: "POST",
-		data: JSON.stringify(object), //JSON데이터를 보낼 때, 꼭 stringify()함수를 써서 데이터를 보내야 @ResponseBody에서 정보 받을 수 있음.
-		url: "${pageContext.request.contextPath}/manage/updateAllUserForm",
-		success: function(data) {
-			console.log(JSON.stringify(tdArr));
-		},
-		error: function(jqXHR, textStatus, errorThrown) {
-			console.log('error while post');
-		}
-	});
+	document.getElementById("id").value = id;
+	document.getElementById("pw").value = pw;
+	document.getElementById("name").value = name;
+	document.getElementById("hiredate").value = hiredate;
+	
+	console.log(document.getElementById("id").value);
+	
+	document.getElementById("modifyForm").submit();
 });
 
 $("#delete").click(function() {
-	var tdArr = new Array();
+	
 	var Btn = $(this);
 	
-	var tr = Btn.parent().parent;
+	var tr = Btn.parent().parent().parent();
 	var td = tr.children();
 	
 	var id = td.eq(0).text();
-	var pw = td.eq(1).text();
-	var name = td.eq(2).text();
-	var hiredate = td.eq(3).text();
 	
-	td.each(function(i) {
-		tdArr.push(td.eq(i).text());
-	});
+	document.getElementById("delete_id").value = id;
 	
+	document.getElementById("deleteForm").submit();
 });
 </script>
 </body>

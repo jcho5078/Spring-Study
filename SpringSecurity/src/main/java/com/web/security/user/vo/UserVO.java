@@ -26,12 +26,6 @@ public class UserVO {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	public String getDate() {
-		return hiredate;
-	}
-	public void setDate(String date) {
-		hiredate = date;
-	}
 	public String getName() {
 		return name;
 	}

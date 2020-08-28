@@ -13,13 +13,12 @@
 	</insert>
 	
 	<delete id="deleteUser" parameterType="UserVO">
-		DELETE FROM USERTABLE WHERE ID = #{id}
+		DELETE FROM UserTable WHERE id = #{id}
 	</delete>
 	
 	<update id="updateUser" parameterType="UserVO">
 		UPDATE USERTABLE 
-		SET PW = #{pw}, NAME = #{name} 
-		WHERE ID = #{id}
+		SET PW = #{pw}, NAME = #{name}
 	</update>
 	
 	<select id="getUserForm" parameterType="String" resultType="UserVO">
