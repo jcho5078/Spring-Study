@@ -8,6 +8,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			/WEB-INF/spring/root-context.xml
+			classpath:security-context.xml
 		</param-value>
 	</context-param>
 	
@@ -26,7 +27,7 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<!-- Spring Security Filter 
+	<!-- Spring Security Filter -->
 	<filter>
 	    <filter-name>springSecurityFilterChain</filter-name>
 	    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -40,13 +41,11 @@
 	    <filter-name>springSecurityFilterChain</filter-name>
 	    <url-pattern>/*</url-pattern>
 	</filter-mapping>
-	-->
 	
-	<!-- 스프링 시큐리티 세션처리 이벤트 관련 리스너 
+	<!-- 스프링 시큐리티 세션처리 이벤트 관련 리스너 -->
 	<listener> 
 		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class> 
 	</listener>
-	-->
 	
 	<!-- Encoding Filter -->
 	<filter>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
+	<sec:authorize access="hasAuthority('MANAGER')">
 	<table border="1">
 		<tr>
 			<th>ID</th>
@@ -42,6 +44,10 @@
 		</tr>
 		</c:forEach>
 	</table>
+	</sec:authorize>
+	<sec:authorize access="hasAuthority('USER')">
+		<h1>권한이 없습니다.</h1>
+	</sec:authorize>
 <script type="text/javascript">
 
 $("#modify").click(function() {

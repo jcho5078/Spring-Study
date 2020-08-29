@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:sec="http://www.springframework.org/schema/security" 
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/security 
+	http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	<!-- 권한 설정 -->
+	<sec:http auto-config="true" use-expressions="true">
+		<!-- 해당 URL에 권한 가진 사람만 접근 가능하도록 설정 -->
+		<sec:intercept-url pattern="/spring_security_login" access="permitAll()" />
+		<sec:intercept-url pattern="/**" access="isAuthenticated()" />
+		<sec:intercept-url pattern="/user/**" access="hasRole('USER')"/>
+		<sec:intercept-url pattern="/manage/**" access="hasRole('MANAGER')"/>
+		<!-- http://localhost:8080/usedb/spring_security_login로 스프링 시큐리티에서 제공하는 로그인 폼 사용 -->
+		<sec:form-login /><!-- 스프링 시큐리티에서 간단한 기본 로그인 폼 제공 -->
+		<!-- /spring_security_login는 기본 제공하는 로그인 폼 위치. -->
+		<sec:logout invalidate-session="true" logout-success-url="/spring_security_login" logout-url="/logout"/>
+	</sec:http>
+	
+	<!-- provider -->
+	<!-- 작동 테스트를 위한 인메모리 처리 방식 -->
+	<sec:authentication-manager>
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="user" password="1234" authorities="USER"/>
+				<sec:user name="manager" password="1234" authorities="MANAGER"/>
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+	
+</beans>
