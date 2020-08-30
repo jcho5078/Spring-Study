@@ -10,7 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-	<sec:authorize access="hasAuthority('MANAGER')">
+	<sec:authorize access="hasAuthority('ROLE_MANAGER')">
 	<table border="1">
 		<tr>
 			<th>ID</th>
@@ -45,7 +45,7 @@
 		</c:forEach>
 	</table>
 	</sec:authorize>
-	<sec:authorize access="hasAuthority('USER')">
+	<sec:authorize access="hasAuthority('ROLE_USER')">
 		<h1>권한이 없습니다.</h1>
 	</sec:authorize>
 <script type="text/javascript">

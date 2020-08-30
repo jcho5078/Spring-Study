@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.web.security.user.CustomUserDetails;
 import com.web.security.user.dao.UserDAO;
 import com.web.security.user.vo.UserVO;
 
@@ -42,5 +43,28 @@ public class UserDAOImpl implements UserDAO{
 		
 		return sqlSession.selectOne("user.getUserForm", id);
 	}
+
+	@Override
+	public UserVO getUserFormForUserDetail(String id) throws Exception {
+		
+		UserVO vo = null;
+		
+		try {
+			vo = sqlSession.selectOne("user.getUserForm", id);
+		}catch (Exception e) {
+			System.out.println("getUserFormForUserDetail 에러");
+		}
+		
+		return vo;
+	}
+
+	//===== 로그인 =====
+	
+	@Override
+	public CustomUserDetails login(String id) {
+		
+		return sqlSession.selectOne("user.login", id);
+	}
+
 
 }

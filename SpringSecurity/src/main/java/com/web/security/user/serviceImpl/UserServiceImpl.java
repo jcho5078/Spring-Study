@@ -43,4 +43,10 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getUserForm(id);
 	}
 
+	@Override
+	public UserVO getUserFormForUserDetail(String id) throws Exception {//id 입력시 해당 id의 유저 정보 가져옴.
+		
+		return userDAO.getUserFormForUserDetail(id);
+	}
+
 }

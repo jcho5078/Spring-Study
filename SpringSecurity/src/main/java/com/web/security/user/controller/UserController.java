@@ -17,6 +17,19 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	//로그인
+	@RequestMapping("login")
+	public String moveLoginPage() {
+		return "loginForm";
+	}
+	
+	@RequestMapping("loginPass")
+	public String login() {
+		
+		return "";
+	}
+	
+	//회원가입
 	@RequestMapping("signUp")
 	public String signUpUser(UserVO vo) {
 		
@@ -37,17 +50,15 @@ public class UserController {
 		return "UserForm";
 	}
 	
-	@RequestMapping("manage/viewAllUser")
+	@RequestMapping("manage/viewAllUser")//모든 회원 정보 조회
 	public String viewAllUser(Model model, UserVO vo) {
-		
-		System.out.println();
 		
 		model.addAttribute("viewAllUser", userService.selectUser(vo));
 		
 		return "viewAllUser";
 	}
 	
-	@RequestMapping(value = "manage/updateAllUserForm")
+	@RequestMapping(value = "manage/updateAllUserForm")//모든 회원 정보 조회창에서 수정버튼 누르면 해당 회원 정보 가지고 수정 페이지로 이동.
 	public String getUpdateFormAllUser(Model model, UserVO vo,
 			@RequestParam String id, @RequestParam String pw, @RequestParam String name, @RequestParam String hiredate) {//@RequestParam은 html의 name속성으로 값을 받아옴.
 		
@@ -58,10 +69,10 @@ public class UserController {
 		
 		model.addAttribute("User", vo);
 		
-		return "updateForm";//JSON값은 받아오나, 페이지 이동이 안되어 고생중.. ajax가 문제인건가 싶다. RestController의 페이지 이동 공부.
+		return "updateForm";
 	}
 	
-	@RequestMapping("manage/updateAllUser")
+	@RequestMapping("manage/updateAllUser")//관리자가 선택한 회원 정보 수정.
 	public String updateAllUser(UserVO vo) {
 		userService.updateUser(vo);
 		return "redirect:/manage/viewAllUser";
@@ -71,5 +82,18 @@ public class UserController {
 	public String deleteAllUser(UserVO vo) throws Exception{
 		userService.deleteUser(vo);
 		return "redirect:/manage/viewAllUser";
+	}
+	
+	//로그인
+	@RequestMapping("")
+	public void loginPass() {
+		
+	}
+	
+	//로그인 실패
+	@RequestMapping("login_duplicate")
+	public String login_duplicate() {
+		System.out.println("login_duplicate!");
+		return "login_duplicate";
 	}
 }

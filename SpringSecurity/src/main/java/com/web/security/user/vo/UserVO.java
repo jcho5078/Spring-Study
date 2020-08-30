@@ -6,6 +6,21 @@ public class UserVO {
 	private String pw;
 	private String name;
 	private String hiredate;
+	private String authority;
+	private int enabled;
+	
+	public String getAuthority() {
+		return authority;
+	}
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+	public int getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
 	
 	public String getHiredate() {
 		return hiredate;

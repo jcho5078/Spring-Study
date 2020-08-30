@@ -9,28 +9,52 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/security 
 	http://www.springframework.org/schema/security/spring-security.xsd">
 	
+	<!-- 비밀번호 인코더(미구현) -->
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
+	<!-- 로그인 인증 -->
+	<bean id="customAuthenticationProvider" class="com.web.security.user.CustomAuthenticationProvider"/>
+	
+	<bean id="userDetailsService" class="com.web.security.user.CustomUserDetailsService" />
+	
+	<!-- 인증매니저 customUserDetailsService를 통해 작업 수행 -->
+	<sec:authentication-manager>
+		<sec:authentication-provider user-service-ref="userDetailsService">
+		</sec:authentication-provider>
+		<sec:authentication-provider ref ="customAuthenticationProvider"/>
+	</sec:authentication-manager>
+	
+	<context:component-scan base-package="com.web.security.user"/>
+	
+	<!-- 인증실패 핸들러 -->
+	<bean id="customAuthenticationFailHandler" class="com.web.security.handler.CustomAuthenticationFailHandler"/>
+	
 	<!-- 권한 설정 -->
 	<sec:http auto-config="true" use-expressions="true">
+	
+		<!-- 세션 관리 -->
+ 		<sec:session-management>
+			<!-- 동일 ID의 세션 최대수가 한 개, 그 이상일 경우는 기존 세션 무효화 -->
+			<sec:concurrency-control max-sessions="1" expired-url="/login_duplicate"/>
+		</sec:session-management>
+		
 		<!-- 해당 URL에 권한 가진 사람만 접근 가능하도록 설정 -->
-		<sec:intercept-url pattern="/spring_security_login" access="permitAll()" />
+		<sec:intercept-url pattern="/login" access="permitAll()" />
+		<sec:intercept-url pattern="/login_duplicate" access="permitAll()" />
 		<sec:intercept-url pattern="/**" access="isAuthenticated()" />
-		<sec:intercept-url pattern="/user/**" access="hasRole('USER')"/>
-		<sec:intercept-url pattern="/manage/**" access="hasRole('MANAGER')"/>
+		<sec:intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
+		<sec:intercept-url pattern="/manage/**" access="hasRole('ROLE_MANAGER')"/>
 		<!-- http://localhost:8080/usedb/spring_security_login로 스프링 시큐리티에서 제공하는 로그인 폼 사용 -->
-		<sec:form-login /><!-- 스프링 시큐리티에서 간단한 기본 로그인 폼 제공 -->
+		<sec:form-login 
+			login-page="/login"
+			login-processing-url="/loginPass"
+			username-parameter="id"
+			password-parameter="pw"
+			default-target-url="/"
+			authentication-failure-handler-ref="customAuthenticationFailHandler"
+		/>
 		<!-- /spring_security_login는 기본 제공하는 로그인 폼 위치. -->
 		<sec:logout invalidate-session="true" logout-success-url="/spring_security_login" logout-url="/logout"/>
 	</sec:http>
-	
-	<!-- provider -->
-	<!-- 작동 테스트를 위한 인메모리 처리 방식 -->
-	<sec:authentication-manager>
-		<sec:authentication-provider>
-			<sec:user-service>
-				<sec:user name="user" password="1234" authorities="USER"/>
-				<sec:user name="manager" password="1234" authorities="MANAGER"/>
-			</sec:user-service>
-		</sec:authentication-provider>
-	</sec:authentication-manager>
 	
 </beans>

@@ -22,7 +22,15 @@
 	</update>
 	
 	<select id="getUserForm" parameterType="String" resultType="UserVO">
-		SELECT ID, NAME, HIREDATE
+		SELECT ID, PW, NAME, HIREDATE
+		FROM USERTABLE
+		WHERE ID = #{id}
+	</select>
+	
+	
+	<!-- 로그인 -->
+	<select id="login" resultType="CustomUserDetails">
+		SELECT *
 		FROM USERTABLE
 		WHERE ID = #{id}
 	</select>

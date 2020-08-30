@@ -11,4 +11,5 @@ public interface UserService {
 	public void deleteUser(UserVO vo);
 	public void updateUser(UserVO vo);
 	public List<UserVO> getUserForm(String id);
+	public UserVO getUserFormForUserDetail(String id) throws Exception;
 }
