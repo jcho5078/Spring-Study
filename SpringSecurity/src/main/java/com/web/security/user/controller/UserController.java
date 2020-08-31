@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.web.security.user.CustomUserDetails;
+import com.web.security.user.CustomUserDetailsService;
 import com.web.security.user.service.UserService;
 import com.web.security.user.vo.UserVO;
 
@@ -17,25 +21,29 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	//로그인
-	@RequestMapping("login")
-	public String moveLoginPage() {
-		return "loginForm";
-	}
+	@Autowired
+	CustomUserDetailsService userDetailsService;
 	
-	@RequestMapping("loginPass")
-	public String login() {
+	//회원가입 페이지 이동
+	@RequestMapping("signUpPage")
+	public String moveSignUpPage() {
 		
-		return "";
+		return "signUp";
 	}
 	
 	//회원가입
-	@RequestMapping("signUp")
-	public String signUpUser(UserVO vo) {
+	@RequestMapping(value = "signUp", method = RequestMethod.POST)
+	public String signUpUser(UserVO vo, 
+			@RequestParam String id, @RequestParam String pw, @RequestParam String name) {
+		
+		String encPassword = userDetailsService.EncodingPw(vo.getPw());//회원가입 하면서 입력된 비밀번호 암호화.
+		
+		vo.setPw(encPassword);
+		
+		System.out.println(vo.getId()+","+vo.getPw()+","+vo.getName());
 		
 		userService.insertUser(vo);
-		
-		return "redirect:/";
+		return "redirect:/login";
 	}
 	
 	@RequestMapping("user/userForm")//개인 정보 조회
@@ -84,11 +92,11 @@ public class UserController {
 		return "redirect:/manage/viewAllUser";
 	}
 	
-	//로그인
-	@RequestMapping("")
-	public void loginPass() {
-		
-	}
+	//로그인 페이지 이동
+		@RequestMapping("login")
+		public String moveLoginPage() {
+			return "loginForm";
+		}
 	
 	//로그인 실패
 	@RequestMapping("login_duplicate")

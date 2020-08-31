@@ -25,12 +25,14 @@ public class CustomAuthenticationFailHandler implements AuthenticationFailureHan
 		}else if(exception.getClass().getSimpleName().equals("SessionAuthenticationException")){
 			request.setAttribute("error", "duplicate");
 		}else if(exception.getClass().getSimpleName().equals("UsernameNotFoundException")){
-			request.setAttribute("error", "not found");
+			request.setAttribute("error", "NotFound");
+		}else if (exception.getClass().getSimpleName().equals("InternalAuthenticationServiceException")) {
+			request.setAttribute("error", "NotFound");
 		}
 		
 		System.out.println("error: "+request.getAttribute("error"));
 		
-		//request.getRequestDispatcher("/user/loginTest").forward(request, response);
+		request.getRequestDispatcher("/login").forward(request, response);
 		
 	}
 

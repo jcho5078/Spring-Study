@@ -17,6 +17,7 @@
 			<th>PW</th>
 			<th>NAME</th>
 			<th>HIREDATE</th>
+			<th>AUTHORITY</th>
 			<th>정보 수정</th>
 			<th>탈퇴</th>
 		</tr>
@@ -26,6 +27,7 @@
 			<td>${user.pw}</td>
 			<td>${user.name}</td>
 			<td>${user.hiredate}</td>
+			<td>${user.authority}</td>
 			<td>
 				<form action="updateAllUserForm" id="modifyForm" method="post">
 					<input type="button" id="modify"value="수정">

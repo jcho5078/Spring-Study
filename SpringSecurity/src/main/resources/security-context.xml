@@ -40,6 +40,8 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 		
 		<!-- 해당 URL에 권한 가진 사람만 접근 가능하도록 설정 -->
 		<sec:intercept-url pattern="/login" access="permitAll()" />
+		<sec:intercept-url pattern="/signUpPage" access="permitAll()" />
+		<sec:intercept-url pattern="/signUp" access="permitAll()" />
 		<sec:intercept-url pattern="/login_duplicate" access="permitAll()" />
 		<sec:intercept-url pattern="/**" access="isAuthenticated()" />
 		<sec:intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
@@ -54,7 +56,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 			authentication-failure-handler-ref="customAuthenticationFailHandler"
 		/>
 		<!-- /spring_security_login는 기본 제공하는 로그인 폼 위치. -->
-		<sec:logout invalidate-session="true" logout-success-url="/spring_security_login" logout-url="/logout"/>
+		<sec:logout invalidate-session="true" logout-success-url="/login" logout-url="/logout"/>
 	</sec:http>
 	
 </beans>

@@ -79,5 +79,9 @@ public class CustomUserDetails implements UserDetails{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public void setPassword(String pw) {//로그인 시, 암호와된 비밀번호를 DB에 넣기 위함.
+		this.pw = pw;
+	}
 
 }

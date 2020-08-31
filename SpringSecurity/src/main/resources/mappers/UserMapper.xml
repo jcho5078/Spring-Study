@@ -4,13 +4,9 @@
 <mapper namespace="user">
 	
 	<select id="viewUser" parameterType="UserVO" resultType="UserVO">
-		SELECT ID, PW, NAME, HIREDATE
+		SELECT ID, PW, NAME, HIREDATE, AUTHORITY
 		FROM USERTABLE
 	</select>
-	
-	<insert id="insertUser" parameterType="UserVO">
-		INSERT INTO USERTABLE (ID, PW, HIREDATE, NAME) VALUES (#{id}, #{pw}, SYSDATE, #{name})
-	</insert>
 	
 	<delete id="deleteUser" parameterType="UserVO">
 		DELETE FROM UserTable WHERE id = #{id}
@@ -34,5 +30,11 @@
 		FROM USERTABLE
 		WHERE ID = #{id}
 	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="insertUser" parameterType="UserVO">
+		INSERT INTO USERTABLE (ID, PW, HIREDATE, NAME) 
+		VALUES (#{id}, #{pw}, SYSDATE, #{name})
+	</insert>
 	
 </mapper>
