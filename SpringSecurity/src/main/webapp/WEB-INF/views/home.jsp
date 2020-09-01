@@ -17,7 +17,8 @@
     <input type="submit" value="로그아웃" />
 </form>
 <h2>페이지 이동</h2>
-<h3>*<a href="userForm" >유저 정보 확인</a></h3>
+<h3>*<a href="user/userForm" >유저 정보 확인</a></h3>
+<h3>*<a href="board">게시판</a></h3>
 <hr>
 <h3>*<a href="manage/viewAllUser" >유저 목록 확인(관리자)</a></h3>
 

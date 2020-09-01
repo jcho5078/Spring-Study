@@ -44,7 +44,6 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 		<sec:intercept-url pattern="/signUp" access="permitAll()" />
 		<sec:intercept-url pattern="/login_duplicate" access="permitAll()" />
 		<sec:intercept-url pattern="/**" access="isAuthenticated()" />
-		<sec:intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
 		<sec:intercept-url pattern="/manage/**" access="hasRole('ROLE_MANAGER')"/>
 		<!-- http://localhost:8080/usedb/spring_security_login로 스프링 시큐리티에서 제공하는 로그인 폼 사용 -->
 		<sec:form-login 

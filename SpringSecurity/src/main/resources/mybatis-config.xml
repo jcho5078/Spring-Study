@@ -9,6 +9,7 @@
 	<typeAliases>
 		<typeAlias type="com.web.security.user.vo.UserVO" alias="UserVO"/>
 		<typeAlias type="com.web.security.user.CustomUserDetails" alias="CustomUserDetails"/>
+		<typeAlias type="com.web.security.board.vo.BoardVO" alias="BoardVO"/>
 	</typeAliases>
 	
 </configuration>

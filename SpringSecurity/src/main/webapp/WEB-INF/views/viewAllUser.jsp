@@ -32,7 +32,6 @@
 				<form action="updateAllUserForm" id="modifyForm" method="post">
 					<input type="button" id="modify"value="수정">
 					<input type="hidden" id="id" name="id" value="">
-					<input type="hidden" id="pw" name="pw" value="">
 					<input type="hidden" id="name" name="name" value="">
 					<input type="hidden" id="hiredate" name="hiredate" value="">
 				</form>
@@ -71,9 +70,6 @@ $("#modify").click(function() {
 	object.hiredate = hiredate;
 	
 	tdArr.push(object);
-	
-	console.log(JSON.stringify(tdArr));
-	console.log(JSON.stringify(object));
 	
 	document.getElementById("id").value = id;
 	document.getElementById("pw").value = pw;

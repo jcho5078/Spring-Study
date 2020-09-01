@@ -50,6 +50,8 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	
+	<bean id="BoardDAO" class="com.web.security.board.daoImpl.BoardDAOImpl"/>
+	<bean id="BoardService" class="com.web.security.board.serviceImpl.BoardServiceImpl"/>
 	<bean id="UserDAO" class="com.web.security.user.daoImpl.UserDAOImpl"/>
 	<bean id="UserService" class="com.web.security.user.serviceImpl.UserServiceImpl"/>
 		

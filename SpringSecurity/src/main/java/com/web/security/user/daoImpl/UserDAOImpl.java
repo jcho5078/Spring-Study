@@ -12,7 +12,7 @@ import com.web.security.user.vo.UserVO;
 public class UserDAOImpl implements UserDAO{
 	
 	@Autowired
-	SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
 	@Override
 	public List<UserVO> selectUser(UserVO vo) {
@@ -31,7 +31,8 @@ public class UserDAOImpl implements UserDAO{
 
 		sqlSession.delete("user.deleteUser", vo);
 	}
-
+	
+	//==== 관리자가 선택한 유저 정보 수정(비밀번호 제외) ====
 	@Override
 	public void updateUser(UserVO vo) {
 
@@ -39,7 +40,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public List<UserVO> getUserForm(String id) {
+	public UserVO getUserForm(String id) {
 		
 		return sqlSession.selectOne("user.getUserForm", id);
 	}
@@ -64,6 +65,13 @@ public class UserDAOImpl implements UserDAO{
 	public CustomUserDetails login(String id) {
 		
 		return sqlSession.selectOne("user.login", id);
+	}
+
+	//===== 유저 개인정보 수정 ====
+	@Override
+	public void updatePrivateUser(UserVO vo) {
+		
+		sqlSession.update("user.updatePrivateUser", vo);
 	}
 
 

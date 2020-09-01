@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<UserVO> getUserForm(String id) {
+	public UserVO getUserForm(String id) {
 		
 		return userDAO.getUserForm(id);
 	}
@@ -47,6 +47,13 @@ public class UserServiceImpl implements UserService{
 	public UserVO getUserFormForUserDetail(String id) throws Exception {//id 입력시 해당 id의 유저 정보 가져옴.
 		
 		return userDAO.getUserFormForUserDetail(id);
+	}
+
+	//유저의 개인정보 변경
+	@Override
+	public void updatePrivateUser(UserVO vo) {
+		
+		userDAO.updatePrivateUser(vo);
 	}
 
 }

@@ -11,7 +11,8 @@ public interface UserDAO {
 	public void insertUser(UserVO vo);
 	public void deleteUser(UserVO vo);
 	public void updateUser(UserVO vo);
-	public List<UserVO> getUserForm(String id);
+	public void updatePrivateUser(UserVO vo);
+	public UserVO getUserForm(String id);
 	public UserVO getUserFormForUserDetail(String id) throws Exception;
 	public CustomUserDetails login(String id);
 }

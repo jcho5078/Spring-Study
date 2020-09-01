@@ -1,5 +1,7 @@
 package com.web.security.user.controller;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -46,19 +48,45 @@ public class UserController {
 		return "redirect:/login";
 	}
 	
-	@RequestMapping("user/userForm")//개인 정보 조회
-	public String moveUserForm(Model model, HttpServletRequest request) {
+	//개인정보 조회
+	@RequestMapping("user/userForm")
+	public String moveUserForm(Model model, Principal principal) {
 		
-		HttpSession session = request.getSession();
+		String id = principal.getName();//스프링 시큐리티로 로그인한 아이디 가져오기.
 		
-		String id = (String)session.getAttribute("id");//스프링 시큐리티 로그인한 세션에서 로그인 id값 가져옴. 세션 설정은 setAttribute("세션이름").
+		System.out.println(id);
 		
 		model.addAttribute("userForm", userService.getUserForm(id));
 		
 		return "UserForm";
 	}
 	
-	@RequestMapping("manage/viewAllUser")//모든 회원 정보 조회
+	//유저의 개인 정보 수정
+	@RequestMapping("user/updateUserForm")
+	public String updateUserForm(UserVO vo,
+			@RequestParam String pw) {
+		
+		String encPw = userDetailsService.EncodingPw(pw);
+		
+		System.out.println(pw);
+		System.out.println(encPw);
+		
+		vo.setPw(encPw);
+		
+		userService.updatePrivateUser(vo);
+		
+		return "redirect:/";
+	}
+	
+	//유저의 개인 탈퇴
+	@RequestMapping("user/deleteUser")
+	public String deletePrivateUser(UserVO vo) throws Exception{
+		userService.deleteUser(vo);
+		return "delete";
+	}
+	
+	//모든 회원 정보 조회
+	@RequestMapping("manage/viewAllUser")
 	public String viewAllUser(Model model, UserVO vo) {
 		
 		model.addAttribute("viewAllUser", userService.selectUser(vo));
@@ -66,12 +94,12 @@ public class UserController {
 		return "viewAllUser";
 	}
 	
-	@RequestMapping(value = "manage/updateAllUserForm")//모든 회원 정보 조회창에서 수정버튼 누르면 해당 회원 정보 가지고 수정 페이지로 이동.
+	//모든 회원 정보 조회창에서 수정버튼 누르면 해당 회원 정보 가지고 수정 페이지로 이동.
+	@RequestMapping(value = "manage/updateAllUserForm")
 	public String getUpdateFormAllUser(Model model, UserVO vo,
-			@RequestParam String id, @RequestParam String pw, @RequestParam String name, @RequestParam String hiredate) {//@RequestParam은 html의 name속성으로 값을 받아옴.
+			@RequestParam String id, @RequestParam String name, @RequestParam String hiredate) {//@RequestParam은 html의 name속성으로 값을 받아옴.
 		
 		vo.setId(id);
-		vo.setPw(pw);
 		vo.setName(name);
 		vo.setHiredate(hiredate);
 		

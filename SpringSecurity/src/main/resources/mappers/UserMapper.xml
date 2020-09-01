@@ -3,6 +3,10 @@
 
 <mapper namespace="user">
 	
+	
+<!--  ===========================  유저 정보  ===============================  -->
+	
+	<!-- 모든 유저 정보 불러오기 -->
 	<select id="viewUser" parameterType="UserVO" resultType="UserVO">
 		SELECT ID, PW, NAME, HIREDATE, AUTHORITY
 		FROM USERTABLE
@@ -12,12 +16,20 @@
 		DELETE FROM UserTable WHERE id = #{id}
 	</delete>
 	
-	<update id="updateUser" parameterType="UserVO">
-		UPDATE USERTABLE 
+	<!-- 개인유저 정보 수정 -->
+	<update id="updatePrivateUser" parameterType="UserVO">
+		UPDATE USERTABLE
 		SET PW = #{pw}, NAME = #{name}
 	</update>
 	
-	<select id="getUserForm" parameterType="String" resultType="UserVO">
+	<!-- 관리자가 유저 정보 수정 -->
+	<update id="updateUser" parameterType="UserVO">
+		UPDATE USERTABLE 
+		SET NAME = #{name}
+	</update>
+	
+	<!-- 유저 개인 정보 불러오기. -->
+	<select id="getUserForm" parameterType="UserVO" resultType="UserVO">
 		SELECT ID, PW, NAME, HIREDATE
 		FROM USERTABLE
 		WHERE ID = #{id}
