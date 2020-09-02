@@ -21,8 +21,15 @@
 		)
 	</insert>
 	
+	<!-- 게시판 글 조회 -->
+	<select id="viewBoard" parameterType="int" resultType="BoardVO">
+		SELECT BDNUM, NAME, TITLE, CONTENT, WRITEDATE
+		FROM BOARDTABLE
+		WHERE BDNUM = #{bdnum}
+	</select>
+		
 	<!-- 게시판 목록 출력 -->
-	<select id="loadBoard" parameterType="BoardVO" resultType="BoardVO">
+	<select id="loadBoard" resultType="BoardVO">
 		SELECT BDNUM, NAME, TITLE, WRITEDATE 
 		FROM BOARDTABLE 
 		ORDER BY BDNUM DESC

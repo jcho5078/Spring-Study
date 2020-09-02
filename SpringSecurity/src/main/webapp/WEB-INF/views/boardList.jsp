@@ -16,19 +16,19 @@
 			<th>글 제목</th>
 			<th>작성일</th>
 		</tr>
-		<c:forEach var="list" items="boardList">
+		<c:forEach var="list" items="${boardList}">
 		<tr>
 			<td>
-				${list.bdnum}
+				<c:out value="${list.bdnum}"/>
 			</td>
 			<td>
-				${list.name}
+				<c:out value="${list.name}"/>
 			</td>
 			<td>
-				${list.title}
+				<a href="board/readBoard?bdnum=${list.bdnum}"><c:out value="${list.title}"/></a>
 			</td>
 			<td>
-				${list.wirtedate}
+				<c:out value="${list.writedate}"/>
 			</td>
 		</tr>
 		</c:forEach>		

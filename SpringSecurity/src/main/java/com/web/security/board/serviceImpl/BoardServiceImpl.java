@@ -14,15 +14,21 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDAO boardDAO;
 
 	@Override
-	public List<BoardVO> loadBoard(BoardVO vo) {
+	public List<BoardVO> loadBoard() throws Exception {
 		
-		return boardDAO.loadBoard(vo);
+		return boardDAO.loadBoard();
 	}
 	
 	@Override
 	public void insertBoard(BoardVO vo) {
 		
 		boardDAO.insertBoard(vo);
+	}
+
+	@Override
+	public BoardVO viewBoard(int bdnum) throws Exception {
+		
+		return boardDAO.viewBoard(bdnum);
 	}
 	
 }

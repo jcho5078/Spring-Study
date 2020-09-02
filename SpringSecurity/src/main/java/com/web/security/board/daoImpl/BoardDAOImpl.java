@@ -15,9 +15,9 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	//게시판 목록 생성
 	@Override
-	public  List<BoardVO> loadBoard(BoardVO vo) {
-		
-		return sqlSession.selectList("board.loadBoard", vo);
+	public List<BoardVO> loadBoard() throws Exception {
+	
+		return sqlSession.selectList("board.loadBoard");
 	}
 	
 	//게시판 글 작성
@@ -25,6 +25,12 @@ public class BoardDAOImpl implements BoardDAO{
 	public void insertBoard(BoardVO vo) {
 		
 		sqlSession.insert("board.insertBoard", vo);
+	}
+
+	@Override
+	public BoardVO viewBoard(int bdnum) throws Exception {
+		
+		return sqlSession.selectOne("board.viewBoard", bdnum);
 	}
 
 }

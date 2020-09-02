@@ -18,16 +18,26 @@ public class BoardController {
 	BoardService boardService;
 	
 	//게시판 글 리스트 출력
-	@RequestMapping("board")
-	public String moveBoardList(Model model, BoardVO vo) {
+	@RequestMapping(value="board" ,method = RequestMethod.GET)
+	public String moveBoardList(Model model) throws Exception {
 		
-		model.addAttribute("boardList", boardService.loadBoard(vo));
+		model.addAttribute("boardList", boardService.loadBoard());
 		
 		return "boardList";
 	}
 	
-	//게시글 작성 페이지로 이동
-	@RequestMapping("board/boardinsert")
+	//게시판 글 조회
+	@RequestMapping(value="board/readBoard",method = RequestMethod.GET)
+	public String viewBoard(Model model, BoardVO vo) throws Exception {
+		
+		System.out.println(vo.getBdnum()+"번글 확인");
+		model.addAttribute("viewBoard", boardService.viewBoard(vo.getBdnum()));
+		
+		return "boardView";
+	}
+	
+	//게시글작성으로 이동
+	@RequestMapping(value="board/boardinsert")
 	public String moveInsertBoardList(Model model, Principal principal) {
 		
 		String name = principal.getName();
