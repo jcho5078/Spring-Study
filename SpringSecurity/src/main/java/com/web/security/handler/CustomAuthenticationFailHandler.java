@@ -27,7 +27,7 @@ public class CustomAuthenticationFailHandler implements AuthenticationFailureHan
 		}else if(exception.getClass().getSimpleName().equals("UsernameNotFoundException")){
 			request.setAttribute("error", "NotFound");
 		}else if (exception.getClass().getSimpleName().equals("InternalAuthenticationServiceException")) {
-			request.setAttribute("error", "NotFound");
+			request.setAttribute("error", "Authentication Error");
 		}
 		
 		System.out.println("error: "+request.getAttribute("error"));

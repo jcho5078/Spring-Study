@@ -108,12 +108,14 @@ public class UserController {
 		return "updateForm";
 	}
 	
-	@RequestMapping("manage/updateAllUser")//관리자가 선택한 회원 정보 수정.
+	//관리자가 선택한 회원 정보 수정.
+	@RequestMapping("manage/updateAllUser")
 	public String updateAllUser(UserVO vo) {
 		userService.updateUser(vo);
 		return "redirect:/manage/viewAllUser";
 	}
 	
+	//관리자가 선택한 회원 탈퇴.
 	@RequestMapping("manage/deleteAllUser")
 	public String deleteAllUser(UserVO vo) throws Exception{
 		userService.deleteUser(vo);
@@ -126,7 +128,7 @@ public class UserController {
 			return "loginForm";
 		}
 	
-	//로그인 실패
+	//로그인 중첩
 	@RequestMapping("login_duplicate")
 	public String login_duplicate() {
 		System.out.println("login_duplicate!");
